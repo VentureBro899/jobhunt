@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkelementui_jobhunt"]=self["webpackChunkelementui_jobhunt"]||[]).push([[638],{7638:function(e,n,t){t.r(n),t.d(n,{default:function(){return f}});var u=function(){var e=this,n=e._self._c;return n("el-empty",{attrs:{description:"30000，你没有权限访问这个页面"}})},l=[],r={},s=r,i=t(1001),c=(0,i.Z)(s,u,l,!1,null,null,null),f=c.exports}}]);
+//# sourceMappingURL=638.fcb45b98.js.map
