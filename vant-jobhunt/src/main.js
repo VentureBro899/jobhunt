@@ -17,6 +17,9 @@ import Loading from '@/components/LoadingPage.vue'
 
 import request from '@/utils/request.js'
 Vue.prototype.$request = request
+// 图片服务器地址
+// Vue.prototype.$picapp = 'http://server.daditg.top'
+
 Vue.use(VanImage)
 Vue.use(Swipe)
 Vue.use(SwipeItem)

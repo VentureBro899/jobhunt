@@ -7,7 +7,7 @@
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white" :height="150">
       <van-swipe-item v-for="item in ppt" :key="item.id">
         <div v-if="item.image=== ''">{{item.description}}</div>
-        <div v-else><img class="pptimg" :src="item.image"></div>
+        <div v-else><img class="pptimg" :src="item.image" @click="gourl(item.router)"></div>
       </van-swipe-item>
     </van-swipe>
     <div class="van-ellipsis statistic"><span class="fa fa-bell"></span>帖子总数:<h5>{{jobTotal}}</h5> 今天发布:<h5>{{jobToday}}</h5>
@@ -108,6 +108,11 @@ export default {
           this.topList = res1.data.data
         }
       })
+    },
+    gourl(url) {
+      if (url != null && url.length > 0) {
+        location.href = 'url'
+      }
     }
   },
   mounted() {
@@ -136,7 +141,7 @@ export default {
     this.getList()
   },
   created() {
-    document.title = '大地推广-首页'
+    document.title = '大地推广'
   }
 }
 </script>

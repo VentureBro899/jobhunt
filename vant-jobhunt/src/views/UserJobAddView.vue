@@ -11,7 +11,7 @@
       <van-popup v-model="showPicker" round position="bottom">
         <van-picker show-toolbar :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
       </van-popup>
-      <van-field v-model.trim="title" name="标题" label="标题" placeholder="请输入标题" :rules="[{required,message:'标题不能为空，且长度小于20',pattern: /^[\u4e00-\u9fa5\w]{1,20}$/}]" />
+      <van-field v-model.trim="title" name="标题" label="标题" placeholder="请输入标题" />
       <van-field v-model="detail" rows="8" autosize label="详情" type="textarea" placeholder="请输入详情" :rules="[{required,message:'详情不能为空，且在10到4000字之间',pattern: /^[\u4e00-\u9fa5\w\W\d\D\r\t\n\s]{10,4000}$/}]" />
       <div class=" uploader">
         <van-uploader v-model="fileList" :after-read="afterRead" :max-size="2 * 1024 * 1024" @oversize="onOversize" @delete="onDel" />

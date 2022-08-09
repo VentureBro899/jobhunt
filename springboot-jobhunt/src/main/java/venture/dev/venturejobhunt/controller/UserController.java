@@ -9,6 +9,7 @@ import venture.dev.venturejobhunt.domain.R;
 import venture.dev.venturejobhunt.domain.User;
 import venture.dev.venturejobhunt.service.UserService;
 import venture.dev.venturejobhunt.utils.CMd5;
+import venture.dev.venturejobhunt.utils.FileTypeJudge;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -38,10 +40,7 @@ public class UserController {
         if(user != null){
             //用户id存session
             session.setAttribute("userid",user.getId());
-         /*   Cookie cookie = new Cookie("JSESSIONID",session.getId());
-            //登录有效期为一个月
-            cookie.setMaxAge(30*24*60*60);
-            resp.addCookie(cookie);*/
+            session.setMaxInactiveInterval(3600 * 48);
             return new R(20000,"success",user);
         }else{
             return new R(40000,"fail");
@@ -113,10 +112,11 @@ public class UserController {
 
 
     @PostMapping("/upload")
-    public R upload(MultipartFile uploadFile,HttpServletRequest req){
+    public R upload(MultipartFile uploadFile,HttpServletRequest req) throws IOException {
         String oldName = uploadFile.getOriginalFilename();
         String suffix = oldName.substring(oldName.lastIndexOf("."), oldName.length());
-        if(!(".jpg".equals(suffix)  || ".png".equals(suffix) || ".gif".equals(suffix))){
+        if(!(FileTypeJudge.isSpecify(uploadFile.getInputStream(),"png")  || FileTypeJudge.isSpecify(uploadFile.getInputStream(),
+                "jpg") || FileTypeJudge.isSpecify(uploadFile.getInputStream(),"gif"))){
             return  new R(40003,"not match");
         }
         String format = sdf.format(new Date());

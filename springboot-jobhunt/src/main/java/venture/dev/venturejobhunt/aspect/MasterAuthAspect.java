@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import venture.dev.venturejobhunt.domain.R;
 import venture.dev.venturejobhunt.exception.AuthorizeException;
 
 import javax.servlet.http.HttpSession;
@@ -38,20 +39,22 @@ public class MasterAuthAspect {
 
     //增强
     @Around("verify()")
-    public void doVerify(ProceedingJoinPoint pjp) {
+    public Object doVerify(ProceedingJoinPoint pjp) {
         //获取session对象
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpSession session = attributes.getRequest().getSession();
-
         int userid = 0;
-        userid = Integer.parseInt((String)session.getAttribute("userid"));
-        if (userid == 10000){// 管理员放行
-            try {
-                pjp.proceed();
-            } catch (Throwable e) {
-                e.printStackTrace();
+        try {
+            userid = (int)session.getAttribute("userid");
+            if (userid == 10000) {// 管理员放行
+                Object proceed = pjp.proceed();
+                return proceed;
+            }else {
+                throw new AuthorizeException();
             }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return new R(30001,"参数错误");
         }
-        throw new AuthorizeException();
     }
 }
