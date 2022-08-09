@@ -97,7 +97,7 @@ public class JobController {
             return new R(30001,"parame error");
         }
        int uid = (int)session.getAttribute("userid");
-        Job job = jobService.findById(id, 5);
+        Job job = jobService.findById(id, uid);
         if(job != null){
             return new R(20000,"success",job);
         }else {
@@ -131,9 +131,12 @@ public class JobController {
         Statistic statistic = (Statistic) total.getData();
         int max = statistic.getTotal();
         int i = new Random().nextInt(max);
+        int sum = 0;//循环总次数
         JobWithUsername jwu = null;
         while (true) {//随机数索引越界则重取随机数
             try {
+                sum++;
+                if(sum >= 3) break;
                 if(i == id)  i = new Random().nextInt(max);//随机id与对当前文章id相同则重新获取
                 jwu = jobService.findOneWithUser(i);
                 break;

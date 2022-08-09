@@ -25,7 +25,7 @@ export default {
 
 <style lang="less">
 #app {
-  font-family: "Tahoma,Helvetica,Arial,'宋体',sans-serif";
+  font-family: PingFangSC-Regular, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   padding-bottom: 60px;
@@ -35,7 +35,7 @@ export default {
 }
 
 pre {
-  font-family: "Tahoma,Helvetica,Arial,'宋体',sans-serif";
+  font-family: PingFangSC-Regular, sans-serif;
   margin: 0;
   white-space: pre-wrap; /*css-3*/
   white-space: -moz-pre-wrap; /*Mozilla,since1999*/

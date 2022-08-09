@@ -53,7 +53,7 @@
       <p>提示：飞机无担保，被骗不负责，担保请认准客服飞机xxx</p>
     </div>
     <div class="jobs">
-      <Job v-show="random != null" :id="random.id" :uid="random.uid" :title="random.title" :cname="random.cname" :avatar="random.avatar" :publisher="random.username" :detail="random.detail" :view="random.view" :date="random.date" :price="random.price" :topping="random.topping" :guarantee="random.guarantee"></Job>
+      <Job v-if="random != null" :id="random.id" :uid="random.uid" :title="random.title" :cname="random.cname" :avatar="random.avatar" :publisher="random.username" :detail="random.detail" :view="random.view" :date="random.date" :price="random.price" :topping="random.topping" :guarantee="random.guarantee"></Job>
     </div>
 
   </div>
@@ -137,15 +137,14 @@ export default {
     })
 
     // 随机获取帖子
-    this.$request
-      .get(`/job/random/${this.$route.params.id}`)
-      .then(res2 => {
-        this.random = res2.data.data
-      })
-      .catch(() => {
+    this.$request.get(`/job/random/${this.$route.params.id}`).then(res2 => {
+      if (res2.data.code === 30001) {
         // 异常，一般是后端找不到某随机数对应id的帖子所引起，则将random置空
         this.random = null
-      })
+      } else if (res2.data.code === 20000) {
+        this.random = res2.data.data
+      }
+    })
   },
   components: { Job, Header }
 }
@@ -241,7 +240,7 @@ export default {
   }
   .desc {
     pre {
-      font-family: FontAwesome;
+      font-family: PingFangSC-Regular, sans-serif;
     }
     padding: 10px;
   }

@@ -54,8 +54,8 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-/* Vue.config.errorHandler = function(err, vm, info) {
+Vue.config.errorHandler = function(err, vm, info) {
   if (err) {
     Toast('网络异常')
   }
-} */
+}

@@ -135,7 +135,9 @@ export default {
     this.getTopping()
     this.getList()
   },
-  created() {}
+  created() {
+    document.title = '大地推广-首页'
+  }
 }
 </script>
 <style lang="less" scoped>
@@ -199,5 +201,6 @@ export default {
 }
 .pptimg {
   height: 150px;
+  width: 100%;
 }
 </style>

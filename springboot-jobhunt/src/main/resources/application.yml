@@ -9,8 +9,9 @@ spring:
     password: root
   redis:
     host: 192.168.106.130
-    #host: 127.0.0.1
+#    host: 127.0.0.1
     port: 6379
+    password: 123456
   servlet:
     multipart:
       max-file-size: 2MB
@@ -22,9 +23,9 @@ mybatis-plus:
 venture:
   mysetting:
     #上传文件的保存路径
-    #upload-file-path: E:/project/upload/
-    upload-file-path: /usr/local/jobhuntimg/
+    upload-file-path: E:/project/upload/
+#    upload-file-path: /usr/local/jobhuntimg/
 server:
   servlet:
     session:
-      timeout: 30d
+      timeout: 2d

@@ -61,14 +61,14 @@ public class JobServiceImpl implements JobService {
         QueryWrapper<JobWithUsername> wrapper = new QueryWrapper<>();
         wrapper.eq("l.id",id);
         IPage<JobWithUsername> jobWithUsernameIPage = jobDao.selectListWithUsernamer(jobPage, wrapper);
-
+        try {
         JobWithUsername jobWithUsername = jobWithUsernameIPage.getRecords().get(0);
         //访问完访问量则+1
         if(jobWithUsername != null){
             jobWithUsername.setView(jobWithUsername.getView() + 1);
             jobDao.updateById(jobWithUsername);
         }
-        try {
+
             return jobWithUsername;
         } catch (IndexOutOfBoundsException e) {
             return null;

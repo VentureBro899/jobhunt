@@ -14,7 +14,7 @@
           <van-button plain hairline type="info" size="small" round :to="'/JobDetails/' + uid + '/' +id">详情</van-button>
         </van-row>
         <div class="tip">
-          <span>用户：{{ publisher}}</span>
+          <span>{{ publisher}}</span>
           <span>{{ view }}次浏览</span>
           <span>{{time}}</span>
           <span>
@@ -39,9 +39,7 @@
     <!-- 详细信息展开 -->
     <div v-else class="desc">
       <div>
-        <pre>
-          {{detail}}
-        </pre>
+        <pre>{{detail}}</pre>
       </div>
       <div class="jobattr">
         <span v-show="price!=0">单价：{{price}}</span>

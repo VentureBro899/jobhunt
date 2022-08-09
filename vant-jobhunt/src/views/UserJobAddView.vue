@@ -1,19 +1,24 @@
 <template>
   <div>
-    <Header title="贴子发布"></Header>
-    <div class="pgtitle">帖子发布</div>
+    <Header title="信息发布"></Header>
+    <div class="pgtitle">
+      1. 请勿发布欺诈，违反国家法律法规等信息<br>
+      2. 禁止发布与广告内容不符的虚假信息<br>
+      3. 网站发布信息内容与本站无关。如遇违法信息不排除报警处理<br>
+    </div>
     <van-form validate-trigger="onChange" @submit="onSubmit">
       <van-field readonly clickable label="分类" :value="sort" placeholder="选择分类" @click="showPicker = true" />
       <van-popup v-model="showPicker" round position="bottom">
         <van-picker show-toolbar :columns="columns" @cancel="showPicker = false" @confirm="onConfirm" />
       </van-popup>
       <van-field v-model.trim="title" name="标题" label="标题" placeholder="请输入标题" :rules="[{required,message:'标题不能为空，且长度小于20',pattern: /^[\u4e00-\u9fa5\w]{1,20}$/}]" />
-      <van-field v-model="detail" rows="8" autosize label="详情" type="textarea" placeholder="请输入详情" :rules="[{required,message:'详情不能为空，且在10到4000字之间',pattern: /^[\u4e00-\u9fa5\w\r\t\n\s]{10,4000}$/}]" />
-      <div class="uploader">
+      <van-field v-model="detail" rows="8" autosize label="详情" type="textarea" placeholder="请输入详情" :rules="[{required,message:'详情不能为空，且在10到4000字之间',pattern: /^[\u4e00-\u9fa5\w\W\d\D\r\t\n\s]{10,4000}$/}]" />
+      <div class=" uploader">
         <van-uploader v-model="fileList" :after-read="afterRead" :max-size="2 * 1024 * 1024" @oversize="onOversize" @delete="onDel" />
       </div>
-      <van-field v-model.trim="contactor1" label="联系方式1" :rules="[{message:'联系方式长度必须小于30个字，不含特殊字符',pattern: /^[\u4e00-\u9fa5\w]{0,20}$/}]" />
-      <van-field v-model.trim="contactor2" label="联系方式2" :rules="[{message:'联系方式长度必须小于30个字，不含特殊字符',pattern: /^[\u4e00-\u9fa5\w]{0,20}$/}]" />
+      <van-field v-model.trim="contactor1" label="联系方式1" />
+      <van-field v-model.trim="contactor2" label="联系方式2" />
+      <!--  <van-field v-model.trim="contactor2" label="联系方式2" :rules="[{message:'联系方式长度必须小于30个字，不含特殊字符',pattern: /^[\u4e00-\u9fa5\w]{0,20}$/}]" /> -->
       <van-field v-show="sort=='需求发布'" v-model.number="groupnum" type="digit" label="团队人数" />
       <van-field v-model.number="price" type="digit" label="单价" />
       <div class="checkbox">
@@ -151,10 +156,11 @@ export default {
   padding: 20px;
 }
 .pgtitle {
-  text-align: center;
-  font-size: 30px;
+  text-align: left;
+  font-size: 18px;
   padding: 30px;
   background: #fff;
+  color: #39a9ed;
 }
 .checkbox {
   padding: 20px;
@@ -163,6 +169,11 @@ export default {
   background: #fff;
 }
 .btng {
+  button {
+    width: 200px;
+    letter-spacing: 10px;
+    text-indent: 10px;
+  }
   text-align: center;
   .balance {
     margin-top: 5px;
