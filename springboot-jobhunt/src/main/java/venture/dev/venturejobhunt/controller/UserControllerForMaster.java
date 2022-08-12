@@ -9,6 +9,8 @@ import venture.dev.venturejobhunt.domain.User;
 import venture.dev.venturejobhunt.service.UserService;
 import venture.dev.venturejobhunt.utils.CMd5;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/master/user")
 public class UserControllerForMaster {
@@ -38,12 +40,14 @@ public class UserControllerForMaster {
         return new R(20000,"success");
     }
 
-    @DeleteMapping("/{id}")
-    public R deleteUser(@PathVariable int id){
-        boolean flag = userService.delete(id);
-        if(flag){
+    @DeleteMapping("/{ids}")
+    public R deleteUser(@PathVariable List<Integer> ids){
+        try {
+            ids.forEach( id -> userService.delete(id));
             return new R(20000,"success");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new R(30003,"error");
         }
-        return new R(30003,"fail");
     }
 }

@@ -68,4 +68,6 @@ public interface JobService {
  IPage<JobWithUsername> getAllForMaster(int current,int size,String key,String username,String cname,boolean topping,boolean keeping);
 
  boolean updateForMaster(Job job);
+
+
 }

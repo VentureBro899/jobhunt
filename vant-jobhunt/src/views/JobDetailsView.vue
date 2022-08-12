@@ -2,7 +2,7 @@
 
   <div class="jobdetails">
     <Header></Header>
-    <div class="main">
+    <div class="main" v-if="jobwu != null">
       <div class="head">
         <div class="picture">
           <van-image round width="70px" height="70px" :src="jobwu.avatar">
@@ -48,6 +48,7 @@
         <span>{{jobwu.thumb}}人想做</span>
       </div>
     </div>
+    <van-skeleton v-else title avatar :row="8" />
     <div class="warning">
       <span>如遇无效、虚假、诈骗信息请立即举报</span>
       <p>提示：飞机无担保，被骗不负责，担保请认准客服飞机xxx</p>
@@ -65,43 +66,8 @@ import Header from '@/components/Header.vue'
 export default {
   data() {
     return {
-      jobwu: {
-        avatar: '',
-        cname: '',
-        contactor1: '',
-        contactor2: '',
-        date: '2022-07-23 17',
-        detail: '',
-        groupnum: 0,
-        guarantee: false,
-        hot: false,
-        id: 0,
-        keep: true,
-        price: 0,
-        showing: true,
-        thumb: 0,
-        title: '萨达',
-        topping: false,
-        uid: 5,
-        username: '李先生',
-        view: 1
-      },
-      random: {
-        avatar: '',
-        cname: '',
-        date: '2022-07-23 17',
-        detail: '',
-        guarantee: false,
-        hot: false,
-        id: 0,
-        price: 0,
-        thumb: 0,
-        title: '萨达',
-        topping: false,
-        uid: 5,
-        username: '李先生',
-        view: 1
-      },
+      jobwu: null,
+      random: null,
       pictures: [],
       userTotal: 1,
       color: '' // 赞图颜色

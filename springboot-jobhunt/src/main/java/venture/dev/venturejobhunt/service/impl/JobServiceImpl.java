@@ -186,6 +186,8 @@ public class JobServiceImpl implements JobService {
     public IPage<JobWithUsername> getAllForMaster(int current, int size, String key,String username, String cname, boolean topping, boolean keeping) {
         Page<JobWithUsername> jwu = new Page<>(current,size);
         LambdaQueryWrapper<JobWithUsername> lqw = new LambdaQueryWrapper<>();
+        //解决lambda缓存问题
+        //TableInfoHelper.initTableInfo(new MapperBuilderAssistant(new MybatisConfiguration(), ""), JobWithUsername.class);
         lqw.eq(topping,JobWithUsername::isTopping,topping).eq(JobWithUsername::isKeeping,keeping)
                 .like(Strings.isNotBlank(key),JobWithUsername::getTitle,key).like(Strings.isNotBlank(username),JobWithUsername::getUsername,username)
                 .eq(Strings.isNotBlank(cname),JobWithUsername::getCname,cname);

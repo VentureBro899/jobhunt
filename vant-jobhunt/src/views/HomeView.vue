@@ -111,7 +111,7 @@ export default {
     },
     gourl(url) {
       if (url != null && url.length > 0) {
-        location.href = 'url'
+        location.href = url
       }
     }
   },

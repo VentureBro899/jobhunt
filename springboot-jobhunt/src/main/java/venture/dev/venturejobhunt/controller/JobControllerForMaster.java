@@ -54,9 +54,16 @@ public class JobControllerForMaster {
 		return new R(flag ? 20000 : 40003 ,"success");
 	}
 
-	@DeleteMapping("/{id}")
-	public R delOne(@PathVariable int id){
-		boolean flag = jobService.delete(id,0);
-		return new R(flag ? 20000 : 40003 ,"success");
+	@DeleteMapping("/{ids}")
+	public R delOne(@PathVariable int[] ids){
+		try {
+			for(int id:ids){
+				boolean flag = jobService.delete(id,0);
+			}
+			return new R(20000,"success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new R(30001,"error");
+		}
 	}
 }

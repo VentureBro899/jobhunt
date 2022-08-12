@@ -1,7 +1,7 @@
 <template>
   <div class="job">
     <!-- 头部开始 -->
-    <van-row class="head">
+    <van-row class="head" @click.stop="todetail()">
       <van-col span="4" style="text-align:center">
         <van-image round width="50px" height="50px" :src="avatar">
         </van-image>
@@ -27,7 +27,7 @@
 
     <!-- 详细信息收起 -->
     <div class="desc" v-if="hidden">
-      <div class="van-ellipsis">
+      <div class="van-ellipsis" @click.stop="todetail()">
         {{detail}}
       </div>
       <div class="jobattr">
@@ -38,7 +38,7 @@
     </div>
     <!-- 详细信息展开 -->
     <div v-else class="desc">
-      <div>
+      <div @click.stop="todetail()">
         <pre>{{detail}}</pre>
       </div>
       <div class="jobattr">
@@ -102,6 +102,9 @@ export default {
     // 是否展开
     switchDetail() {
       this.hidden = !this.hidden
+    },
+    todetail() {
+      this.$router.push('/JobDetails/' + this.uid + '/' + this.id)
     }
   }
 }
@@ -116,6 +119,7 @@ export default {
   border: 1px solid #f8f6f6;
   text-align: left;
   padding-bottom: 15px;
+  cursor: pointer;
   .title {
     margin: 0px;
     font-weight: normal;
@@ -167,6 +171,7 @@ export default {
     span:nth-child(1) {
       margin-right: 20px;
     }
+    cursor: default;
   }
 }
 </style>

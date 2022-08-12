@@ -1,5 +1,6 @@
 package venture.dev.venturejobhunt.conf;
 
+
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import org.springframework.context.annotation.Bean;
@@ -7,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MybatisPlusConf {
+
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(){
         //1 创建MybatisPlusInterceptor拦截器对象
@@ -15,4 +17,5 @@ public class MybatisPlusConf {
         mpInterceptor.addInnerInterceptor(new PaginationInnerInterceptor());
         return mpInterceptor;
     }
+
 }

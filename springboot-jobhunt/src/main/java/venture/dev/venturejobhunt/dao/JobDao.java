@@ -11,6 +11,9 @@ import org.apache.ibatis.annotations.Update;
 import venture.dev.venturejobhunt.domain.Job;
 import venture.dev.venturejobhunt.domain.JobWithUsername;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface JobDao extends BaseMapper<Job> {
     /**
@@ -32,8 +35,9 @@ public interface JobDao extends BaseMapper<Job> {
     @Update("update jh_job set thumb=thumb+1 where id=#{id}")
     boolean updateThumb(int id);
 
- /*   @Update("UPDATE jh_job SET cname=#{cname}, title=#{title}, detail=#{detail}, groupnum=#{groupnum}," +
-            " guarantee=#{guarantee}, price=#{price}, contactor1=#{contactor1}, contactor2=#{contactor2}," +
-            " showing=#{showing}, picture=#{showing} WHERE (id = #{id} and uid = #{uid})")
-    boolean updateSome(int id,int uid,)*/
+    @Select("select cname name,count(*) value from jh_job group by cname")
+    List<Map<String,Integer>> selectCountByCname();
+
+    @Select("select count(*) from jh_job where date=#{date} GROUP BY date ")
+    Integer selectCountBydate(String date);
 }

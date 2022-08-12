@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  */
 
 
-
+//
 @Aspect
 @Component
 public class MasterAuthAspect {
@@ -33,7 +33,8 @@ public class MasterAuthAspect {
             "execution(* venture.dev.venturejobhunt.controller.PPTController.*(..)) && " +
             "!execution(* venture.dev.venturejobhunt.controller.PPTController.getAllForUser())" +
             "|| execution(* venture.dev.venturejobhunt.controller.NoticeController.*(..))" +
-            "&& !execution(* venture.dev.venturejobhunt.controller.NoticeController.get())")
+            "&& !execution(* venture.dev.venturejobhunt.controller.NoticeController.get())" +
+            "|| execution(* venture.dev.venturejobhunt.controller.GeneralController.*(..))")
     public void verify() {
     }
 
@@ -54,7 +55,7 @@ public class MasterAuthAspect {
             }
         } catch (Throwable e) {
             e.printStackTrace();
-            return new R(30001,"参数错误");
+            return new R(30001,"用户未登录");
         }
     }
 }
