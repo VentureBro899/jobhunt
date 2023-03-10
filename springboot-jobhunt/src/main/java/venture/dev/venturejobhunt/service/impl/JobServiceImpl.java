@@ -154,7 +154,6 @@ public class JobServiceImpl implements JobService {
             today = "0";
             vo.set("jobToday",today);
         }
-
         return new Statistic(Integer.parseInt(total),Integer.parseInt(today));//转换为整型返回
     }
 

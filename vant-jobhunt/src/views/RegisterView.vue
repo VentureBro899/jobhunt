@@ -9,13 +9,16 @@
         </template>
       </van-field>
       <van-field v-model="username" name="你的昵称" label="你的昵称" placeholder="输入你的昵称" :rules="[{ required: true, message: '请填写你的昵称' }]" />
-      <van-field v-model="telephone" type="telephone" name="你的手机号" label="你的手机号" placeholder="输入你的手机号" :rules="[{ required: true, message: '请填写正确的手机号',pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/ }]" />
-      <van-field v-model="email" type="email" name="你的邮箱" label="你的邮箱" placeholder="输入你的邮箱" :rules="[{ required: true, message: '请填写正确的邮箱',pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/  }]" />
-      <van-field v-model="password" type="password" name="你的密码" label="密码" placeholder="输入你的密码" :rules="[{ required: true, message: '密码必须为6-20位英文字母、数字或者符号（除空格），且字母、数字和标点符号至少包含两种',pattern: /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){8,20}$/}]" />
+      <van-field v-model="telephone" type="telephone" name="你的手机号" label="你的手机号" placeholder="输入你的手机号"
+        :rules="[{ required: true, message: '请填写正确的手机号',pattern: /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/ }]" />
+      <van-field v-model="email" type="email" name="你的邮箱" label="你的邮箱" placeholder="输入你的邮箱"
+        :rules="[{ required: true, message: '请填写正确的邮箱',pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/  }]" />
+      <van-field v-model="password" type="password" name="你的密码" label="密码" placeholder="输入你的密码"
+        :rules="[{ required: true, message: '密码必须为6-20位英文字母、数字或者符号（除空格），且字母、数字和标点符号至少包含两种',pattern: /^(?![\d]+$)(?![a-zA-Z]+$)(?![^\da-zA-Z]+$)([^\u4e00-\u9fa5\s]){8,20}$/}]" />
       <div class="tip">已有账号?<a @click="switchPage">去登录</a></div>
       <div style="margin: 16px;">
         <van-button v-if="!success" round block type="info" native-type="submit">注册</van-button>
-        <van-button v-if="success" round block type="info" to="/user/login">去登陆</van-button>
+        <van-button v-if="success" round block type="info" to="/login">去登陆</van-button>
       </div>
     </van-form>
   </div>
@@ -46,7 +49,7 @@ export default {
       )
       if (res.code === 20000) {
         this.success = true
-        this.$toast.success(res.message)
+        this.$toast.success('注册成功')
       } else {
         this.$toast.fail(res.message)
       }
